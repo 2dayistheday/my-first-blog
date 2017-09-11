@@ -1,0 +1,9 @@
+*.pyc
+*~
+__pycache__
+myvenv
+db.splite3
+/static
+.DS_Store
+
+
