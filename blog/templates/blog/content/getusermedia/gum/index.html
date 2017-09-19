@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>GetUserMedia - gum</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+
+<body>
+
+  <div id="container">
+
+    <h1><a href="//webrtc.github.io/samples/" title="WebRTC samples homepage">WebRTC samples</a> <span>getUserMedia</span></h1>
+
+    <video autoplay></video>
+    <div id="errorMsg"></div>
+
+    <p class="warning"><strong>Warning:</strong> if you're not using headphones, pressing play will cause feedback.</p>
+
+    <p>Display the video stream from <code>getUserMedia()</code> in a video element.</p>
+
+    <p>The <code>MediaStream</code> object <code>stream</code> passed to the <code>getUserMedia()</code> callback is in global scope, so you can inspect it from the console.</p>
+
+    <a href="#" title="View source for this page on GitHub" id="viewSource">View source on GitHub</a>
+  </div>
+
+  <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+  <script src="../../../js/common.js"></script>
+
+  <script>
+    var errorElement = document.querySelector('#errorMsg');
+    var video = document.querySelector('video');
+    //document.querySelector는 자바스크립트가 속한 도큐먼트의 video 태그를 반환한다, #는 id를 의미 .는 class를 의미
+
+    // Put variables in global scope to make them available to the browser console.
+    var constraints = window.constraints = {
+        audio: false,
+        video: true
+    };
+    //constraints는 video나 audio트랙을 요청하는지 여부
+    //자세히 : https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamConstraints
+
+    function handleSuccess(stream) {
+        var videoTracks = stream.getVideoTracks();
+        console.log('Got stream with constraints:', constraints);
+        console.log('Using video device: ' + videoTracks[0].label);
+        stream.oninactive = function() {
+            console.log('Stream inactive');
+        };
+        window.stream = stream; // make variable available to browser console
+        video.srcObject = stream;
+    }
+    //stream은 MediaStream API
+    //자세히 : https://developer.mozilla.org/en-US/docs/Web/API/MediaStream
+
+    function handleError(error) {
+        if (error.name === 'ConstraintNotSatisfiedError') {
+            errorMsg('The resolution ' + constraints.video.width.exact + 'x' +
+                constraints.video.width.exact + ' px is not supported by your device.');
+        } else if (error.name === 'PermissionDeniedError') {
+            errorMsg('Permissions have not been granted to use your camera and ' +
+                'microphone, you need to allow the page access to your devices in ' +
+                'order for the demo to work.');
+        }
+        errorMsg('getUserMedia error: ' + error.name, error);
+    }
+
+    function errorMsg(msg, error) {
+        errorElement.innerHTML += '<p>' + msg + '</p>';
+        if (typeof error !== 'undefined') {
+            console.error(error);
+        }
+    }
+
+    navigator.mediaDevices.getUserMedia(constraints).
+    then(handleSuccess).catch(handleError);
+  </script>
+
+</body>
+</html>
