@@ -8,4 +8,6 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^content/getusermedia/gum/$', views.gum, name='gum'),
     url(r'^content/getusermedia/canvas/$', views.canvas, name='canvas'),
+    url(r'^content/getusermedia/resolution/$', views.resolution, name='resolution'),
+    url(r'^content/peerconnection/pc1/$', views.pc1, name='pc1'),
 ]

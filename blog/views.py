@@ -45,3 +45,9 @@ def gum(request):
 
 def canvas(request):
     return render(request, 'blog/content/getusermedia/canvas/index.html', {})
+
+def resolution(request):
+    return render(request, 'blog/content/getusermedia/resolution/index.html', {})
+
+def pc1(request):
+    return render(request, 'blog/content/peerconnection/pc1/index.html', {})
