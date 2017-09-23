@@ -56,3 +56,6 @@ def main(request):
     return render(request, 'blog/main.html',{})
 def group(request):
     return render(request, 'blog/group.html',{})
+
+def drive(request):
+    return render(request, 'blog/drive.html',{})
