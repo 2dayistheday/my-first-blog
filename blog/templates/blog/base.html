@@ -6,17 +6,46 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
-        <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Asap+Condensed|Sedgwick+Ave+Display" rel="stylesheet">
+
     </head>
     <body>
     <div class="page-header">
+        <h1 class="main_font">
+            <a href="/">
+                Chamber
+            </a>
+        </h1>
+        <h3>
+                create, share and discuss your everythings
+        </h3>
         {% if user.is_authenticated %}
-            <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <p class="save">Welcome! {{user.username}}</p>
         {% endif %}
-        <h1><a href="/">Django Girls Blog</a></h1>
     </div>
-    <div class="content container">
+    <div class="content container-fluid">
         <div class="row">
+            <div class="col-sm-2 sidenav">
+                {% if user.is_authenticated %}
+                <h4>{{user.username}}</h4>
+                {% endif %}
+
+                <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#section1">All</a></li>
+                <li><a href="#section2">Work</a></li>
+                <li><a href="#section3">Study</a></li>
+                <li><a href="#section3">Friends</a></li>
+                </ul><br>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search Group..">
+                <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+                </button>
+                </span>
+            </div>
+            </div>
+
             <div class="col-md-8">
             {% block content %}
             {% endblock %}

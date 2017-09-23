@@ -51,3 +51,8 @@ def resolution(request):
 
 def pc1(request):
     return render(request, 'blog/content/peerconnection/pc1/index.html', {})
+
+def main(request):
+    return render(request, 'blog/main.html',{})
+def group(request):
+    return render(request, 'blog/group.html',{})

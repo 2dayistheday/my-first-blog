@@ -15,7 +15,11 @@
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Lobster', cursive;
+    font-family: 'Asap Condensed', sans-serif;
+}
+
+.main_font{
+    font-family: 'Sedgwick Ave Display', cursive;
 }
 
 .date {
@@ -43,4 +47,8 @@ h1, h2, h3, h4 {
 
 .post h1 a, .post h1 a:visited {
     color: #000000;
+}
+
+.panel, .panel-default {
+    width: 30%;
 }
